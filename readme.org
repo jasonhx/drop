@@ -1,0 +1,78 @@
+#+TITLE: Drop -- Drop-token API endpoint
+#+STARTUP: showall
+
+* description
+
+Drop is an implementation of a REST API to a board game. 
+
+The game is implemented as a pure reducing function which is wrapped
+in Software Transaction Memory logic to prevent collisions and race
+conditions. 
+
+It includes tests for the game implementation.
+
+* Run:
+** Prerequisites
+
+Drop requires that Java 1.8+ be installed.
+
+** Running
+
+In order to run drop from a shell command prompt, from the project
+root directory,
+
+#+BEGIN_SRC shell
+java -jar /path/to/drop-VERSION.jar
+#+END_SRC
+
+Drop will then serve from [[http://localhost❌️000/drop_token][localhost port 3000]].
+
+API testers are TBD
+
+* Build:
+** Prerequisites
+
+Drop is written in Clojure. Clojure’s (most popular) automation tool
+is [[http://leiningen.org][Leiningen]], which must be installed in order to work with the source code.
+
+Please follow installation instructions at the link.
+
+** Working with the code
+Once it has been installed, from the root project directory ("drop"),
+any of the following will work:
+
+*** Run tests
+#+BEGIN_SRC shell
+lein test
+#+END_SRC
+
+*** Start a REPL session
+#+BEGIN_SRC shell
+lein repl
+#+END_SRC
+
+Once inside a REPL session, to start the server
+
+#+BEGIN_SRC clojure
+(in-ns 'drop.server)
+(start)
+#+END_SRC
+
+Or, to run a sample game, 
+
+#+BEGIN_SRC clojure
+(in-ns 'drop.core-test)
+(reduce play (blank) (shuffle (flatten (repeatedly 4 (partial range 4)))))
+#+END_SRC
+
+*** Examine dependencies
+
+#+BEGIN_SRC  shell
+lein deps :tree
+#+END_SRC
+
+*** Build jars
+
+#+BEGIN_SRC shell
+lein uberjar
+#+END_SRC
